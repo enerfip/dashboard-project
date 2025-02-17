@@ -1,0 +1,77 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: MuseoModerno;
+  color: #1A4C2D;
+}
+
+section {
+  position: relative;
+}
+
+.totalInvest {
+  text-align: center;
+  display: flex;
+  justify-content: end;
+}
+
+.totalInvest p {
+  background-color: #F2F0EB;
+  padding: .5rem;
+  border-radius: 3rem;
+  font-size: 70px;
+  font-weight: 300;
+  width: 100%;
+}
+
+
+.currentInvest {
+  position: absolute;
+  top: 0;
+  left: 10%;
+}
+
+.currentInvest .currentAmount {
+  font-weight: 500;
+  font-size: 250px;
+  margin-bottom: 0;
+}
+
+.currentInvest .currentYear {
+  font-weight: 300;
+  font-size: 70px;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1; 
+  }
+}
+
+.gifJulien, .gifSeb {
+  position: absolute;
+  top: 60%;
+  animation: slideUp 1.5s ease-out;
+}
+
+.gifJulien {
+  right: 70%;
+  padding-left: 1rem;
+}
+
+.gifSeb {
+  left: 70%;
+  padding-right: 1rem;
+}
+
+img {
+  width: 100%;
+  border-radius: 20px;
+}
