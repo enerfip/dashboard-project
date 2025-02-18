@@ -41,11 +41,13 @@ function Dashboard() {
   const retreiveAmountCurrentYear = async () => {
     const amount = await retrieveAmountForDisplay(739, "nxSL9zPbhQ89auEd9l8lHNXUuBV2AuDFjekTwXKx");
     setAmountCurrentYear(amount);
+    console.log("amount current year", amountCurrentYear);
+    console.log("previous amount current year", previousAmountCurrentYear)
+    
   };
   useEffect(() => {
-      retreiveAmountCurrentYear();
+      retreiveAmountCurrentYear().then(() => setPreviousAmountCurrentYear(amountCurrentYear));
       retreiveTotalAmount();
-      setPreviousAmountCurrentYear(amountCurrentYear)
   }, []);
 
   useEffect(() => {
