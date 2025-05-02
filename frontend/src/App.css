@@ -7,16 +7,6 @@
   color: #1A4C2D;
 }
 
-section {
-  position: relative;
-}
-
-.totalInvest {
-  text-align: center;
-  display: flex;
-  justify-content: end;
-}
-
 .totalInvest p {
   background-color: #F2F0EB;
   padding: .5rem;
@@ -26,16 +16,9 @@ section {
   width: 100%;
 }
 
-
-.currentInvest {
-  position: absolute;
-  top: 0;
-  left: 10%;
-}
-
 .currentInvest .currentAmount {
   font-weight: 500;
-  font-size: 250px;
+  font-size: 100px;
   margin-bottom: 0;
 }
 
@@ -75,3 +58,75 @@ img {
   width: 100%;
   border-radius: 20px;
 }
+
+/** OFFICE SCREEN PART **/
+
+@media (min-width: 2000px) {
+  #root {
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-family: MuseoModerno;
+    color: #1A4C2D;
+  }
+
+  .totalInvest {
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .totalInvest p {
+    font-size: 100px;
+  }
+
+  .invest-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .currentInvest .currentAmount {
+    margin-top: 0;
+    font-size: 300px;
+  }
+
+  .currentInvest .currentYear {
+    font-size: 120px;
+  }
+
+  .gifJulien, .gifSeb {
+    top: 95%;
+  }
+}
+
+/** MOBILE PART **/
+
+@media (max-width: 575px) {
+  .totalInvest {
+    display: block;
+    margin: auto;
+    width: 100%;
+  }
+
+  .totalInvest p {
+    margin: 0;
+    font-size: 40px;
+  }
+
+  .currentInvest {
+    width: 100%;
+    margin: auto;
+  }
+
+  .currentInvest .currentAmount {
+    margin: 50px 0;
+    font-size: 50px;
+  }
+
+  .currentInvest .currentYear {
+    margin: 0;
+    font-size: 50px;
+  }
+}
+
+/** MOBILE PART **/

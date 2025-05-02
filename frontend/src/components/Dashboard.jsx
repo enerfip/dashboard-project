@@ -68,7 +68,7 @@ function Dashboard() {
 
   return (
     <>
-      <section>
+      <section className='invest-page'>
         <div className='totalInvest'>
           <p>Total amount raised : <b><SlotCounter value={totalAmount} /></b></p>
         </div>
