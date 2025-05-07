@@ -11,6 +11,8 @@ function Chart() {
   const [monthlyAmountCurrentYear, setMonthlyAmountCurrentYear] =  useState([]);
   const [cumulativeAmountLastYear, setCumulativeAmountLastYear] = useState([]);
   const [cumulativeAmountCurrentYear, setCumulativeAmountCurrentYear] = useState([]);
+  const currentMonth = new Date().getMonth();
+  const currentSemester = currentMonth < 6 ? 1 : 2;
 
 
   const retrieveAmountForDisplay = async (queryId, apiKey) => {
@@ -77,16 +79,21 @@ function Chart() {
       animationEnabled: true,
       theme: "light2",
       title: {
-          text: "Comparatif des montants collectés"
+          text: "Comparatif des montants collectés",
+          fontFamily: "MuseoModerno",
+          fontColor: "#1A4C2D"
       },
       axisX: {
           valueFormatString: "MMM",
           intervalType: "month",
           interval: 1,
+          labelFontSize: 20
       },
       axisY: {
           title: "En millions d'euros",
-          suffix: "M€",
+          interval: 2.5,
+          minimum: 5,
+          labelFontSize: 20
       },
       toolTip: {
           shared: true
@@ -96,12 +103,15 @@ function Chart() {
           itemclick: function (e) {
               e.dataSeries.visible = typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ? false : true;
               e.chart.render();
-          }
+          },
+          fontSize: 20,
       },
       data: [
           {
               type: "line",
-              name: `Montant collecté mois par mois l'année ${new Date().getFullYear() - 1}`,
+              lineThickness: 5,
+              markerSize: 10,
+              name: `${new Date().getFullYear() - 1}`,
               showInLegend: true,
               yValueFormatString: "#,###M€",
               dataPoints: monthlyAmountLastYear.map((amount, index) => ({
@@ -111,7 +121,9 @@ function Chart() {
           },
           {
               type: "line",
-              name: `Montant collecté mois par mois l'année ${new Date().getFullYear()}`,
+              lineThickness: 5,
+              markerSize: 10,
+              name: `${new Date().getFullYear()}`,
               showInLegend: true,
               yValueFormatString: "#,###M€",
               dataPoints: monthlyAmountCurrentYear.map((amount, index) => ({
@@ -122,20 +134,27 @@ function Chart() {
       ]
   };
 
-  const cumulativeComparisonOptions = {
+  // Comparatif des cumuls S1
+  const cumulativeComparisonOptionsS1 = {
     animationEnabled: true,
     theme: "light2",
     title: {
-      text: "Comparatif des cumuls"
+      text: "Semestre 1",
+      fontSize: 20,
+      fontFamily: "MuseoModerno"
     },
     axisX: {
       valueFormatString: "MMM",
       intervalType: "month",
-      interval: 1
+      interval: 1,
+      labelFontSize: 20
     },
     axisY: {
-      title: "En millions d'euos",
-      suffix: "M€"
+      title: "En millions d'euros",
+      minimum: 0,
+      maximum: 100,
+      interval: 20,
+      labelFontSize: 20
     },
     toolTip: {
       shared: true
@@ -145,26 +164,92 @@ function Chart() {
       itemclick: function (e) {
         e.dataSeries.visible = typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ? false : true;
         e.chart.render();
-    }
+      },
+      fontSize: 20,
     },
     data: [
       {
         type: "line",
-        name: `Cumul des montants collectés l'année ${new Date().getFullYear() - 1}`,
+        lineThickness: 5,
+        markerSize: 10,
+        name: `${new Date().getFullYear() - 1}`,
         showInLegend: true,
         yValueFormatString: "#,###M€",
-        dataPoints: cumulativeAmountLastYear.map((amount, index) => ({
+        dataPoints: cumulativeAmountLastYear.slice(0, 6).map((amount, index) => ({
           x: new Date(new Date().getFullYear(), index, 1),
           y: amount / 1000000
         }))
       },
       {
         type: "line",
-        name: `Cumul des montants collectés l'année ${new Date().getFullYear()}`,
+        lineThickness: 5,
+        markerSize: 10,
+        name: `${new Date().getFullYear()}`,
         showInLegend: true,
         yValueFormatString: "#,###M€",
-        dataPoints: cumulativeAmountCurrentYear.map((amount, index) => ({
+        dataPoints: cumulativeAmountCurrentYear.slice(0, 6).map((amount, index) => ({
           x: new Date(new Date().getFullYear(), index, 1),
+          y: amount / 1000000
+        }))
+      },
+    ]
+  };
+
+  // Comparatif des cumuls S2
+  const cumulativeComparisonOptionsS2 = {
+    animationEnabled: true,
+    theme: "light2",
+    title: {
+      text: "Semestre 2",
+      fontSize: 20,
+      fontFamily: "MuseoModerno"
+    },
+    axisX: {
+      valueFormatString: "MMM",
+      intervalType: "month",
+      interval: 1,
+      labelFontSize: 20
+    },
+    axisY: {
+      title: "En millions d'euros",
+      minimum: 100,
+      maximum: 200,
+      interval: 20,
+      labelFontSize: 20
+    },
+    toolTip: {
+      shared: true
+    },
+    legend: {
+      cursor: "pointer",
+      itemclick: function (e) {
+        e.dataSeries.visible = typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible ? false : true;
+        e.chart.render();
+      },
+      fontSize: 20,
+    },
+    data: [
+      {
+        type: "line",
+        lineThickness: 5,
+        markerSize: 10,
+        name: `${new Date().getFullYear() - 1}`,
+        showInLegend: true,
+        yValueFormatString: "#,###M€",
+        dataPoints: cumulativeAmountLastYear.slice(6).map((amount, index) => ({
+          x: new Date(new Date().getFullYear(), index + 6, 1),
+          y: amount / 1000000
+        }))
+      },
+      {
+        type: "line",
+        lineThickness: 5,
+        markerSize: 10,
+        name: `${new Date().getFullYear()}`,
+        showInLegend: true,
+        yValueFormatString: "#,###M€",
+        dataPoints: cumulativeAmountCurrentYear.slice(6).map((amount, index) => ({
+          x: new Date(new Date().getFullYear(), index + 6, 1),
           y: amount / 1000000
         }))
       },
@@ -176,8 +261,21 @@ function Chart() {
         <div style={{marginBottom: "4rem"}}>
             <CanvasJSChart options={amountsComparisonOptions} />
         </div>
+
         <div>
-          <CanvasJSChart options={cumulativeComparisonOptions} />
+          <h1>Comparatif des cumuls</h1>
+
+          <div>
+            {currentSemester == 1 ? (
+              <div>
+                <CanvasJSChart options={cumulativeComparisonOptionsS1} />
+              </div>
+            ) : (
+              <div>
+                <CanvasJSChart options={cumulativeComparisonOptionsS2} />
+              </div>
+            )}
+          </div>
         </div>
       </>
     );
