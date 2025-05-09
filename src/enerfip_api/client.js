@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = import.meta.env.VITE_API_URL;
+const baseURL = "https://redash-enerfip.herokuapp.com";
 
 export const getEnerfipQueryResult = async (queryId, apiKey) => {
   try {
