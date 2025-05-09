@@ -7,5 +7,5 @@ export default defineConfig({
   build: {
     commonjsOptions: { transformMixedEsModules: true } // Change
   },
-  base: '/dashboard-project/'
+  // base: '/dashboard-project/'
 })

@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const baseURL = import.meta.env.VITE_API_URL;
+const apiURL = import.meta.env.VITE_API_URL;
 
 export const getEnerfipQueryResult = async (queryId, apiKey) => {
   try {
-    const response = await axios.get(`${baseURL}/api/queries/${queryId}/results`, {
+    const response = await axios.get(`${apiURL}/api/queries/${queryId}/results`, {
       headers: {
         "Content-Type": "application/json",
       },
