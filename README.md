@@ -1,4 +1,4 @@
-# Enerfip Dashboard
+# Enerfip Dashboard 
 
 ## Description :
   This project is a dynamic dashboard that displays real-time amounts collected by the company Enerfip for the current year (Year N) and the previous year (Year N-1). It also provides a graphical comparison of collected amounts and cumulative amounts between the two years.
