@@ -1,30 +1,67 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  font-family: MuseoModerno;
+  font-family: MuseoSans-300;
   color: #1A4C2D;
 }
 
-.totalInvest p {
+@font-face {
+  font-family: "MuseoSans-300";
+  src: local("MuseoSans-300"),
+    url("./fonts/MuseoSans-300.otf") format("opentype");
+  font-weight: normal;
+}
+
+.secondaryAmountInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.totalInvest, .todayInvest {
+  display: flex;
+}
+
+.totalInvest {
   background-color: #F2F0EB;
+  border-radius: 3rem;
+  padding: .2rem;
+}
+
+.totalInvest p {
+  padding: .5rem;
+  font-size: 50px;
+  font-weight: 200;
+  width: 100%;
+  margin: 0;
+}
+
+.todayInvest p {
   padding: .5rem;
   border-radius: 3rem;
-  font-size: 70px;
-  font-weight: 300;
+  font-size: 50px;
+  font-weight: 200;
   width: 100%;
 }
 
+.currentInvest {
+  margin-top: 4rem;
+}
+
 .currentInvest .currentAmount {
-  font-weight: 500;
+  font-weight: 200;
   font-size: 100px;
+  margin-top: 2rem;
   margin-bottom: 0;
 }
 
 .currentInvest .currentYear {
-  font-weight: 300;
+  font-weight: 200;
   font-size: 70px;
+  margin: 0;
 }
 
 @keyframes slideUp {
@@ -70,19 +107,15 @@ img {
     color: #1A4C2D;
   }
 
-  .totalInvest {
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  .totalInvest p {
+  .totalInvest p, .todayInvest p {
     font-size: 100px;
   }
 
   .invest-page {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .currentInvest .currentAmount {
@@ -97,12 +130,16 @@ img {
   .gifJulien, .gifSeb {
     top: 95%;
   }
+
+  .secondaryAmountInfo {
+    margin: 0 5rem;
+  }
 }
 
 /** MOBILE PART **/
 
 @media (max-width: 575px) {
-  .totalInvest {
+  .totalInvest, .todayInvest {
     display: block;
     margin: auto;
     width: 100%;
