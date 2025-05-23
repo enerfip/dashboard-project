@@ -11,12 +11,13 @@ function Dashboard() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [amountCurrentYear, setAmountCurrentYear] = useState(0);
   const [previousAmountCurrentYear, setPreviousAmountCurrentYear] = useState(0);
+  const [amountCurrentDay, setAmountCurrentDay] = useState(0);
   const [showAnimation, setShowAnimation] = useState(false);
   const audioRef = useRef(null);
 
 
   const triggerAnimationIfReady = () => {
-    const animationThresholdAmount = 10000000.0;
+    const animationThresholdAmount = 1000000.0;
     const differenceAmount = Math.floor(amountCurrentYear/animationThresholdAmount) - Math.floor(previousAmountCurrentYear/animationThresholdAmount);
   
     if (differenceAmount === 1) {
@@ -38,6 +39,12 @@ function Dashboard() {
     setTotalAmount(amount);
   };
 
+  const retrieveAmountCurrentDay = async () => {
+    const amount = await retrieveAmountForDisplay(1003, "Ellha3oyOl5R88IxpzRUHx7RAJ0BG2zFG5yNoUUo");
+    setAmountCurrentDay(amount);
+    console.log("amount current day: ", amountCurrentDay);
+  };
+
   const retreiveAmountCurrentYear = async () => {
     const amount = await retrieveAmountForDisplay(739, "nxSL9zPbhQ89auEd9l8lHNXUuBV2AuDFjekTwXKx");
     setAmountCurrentYear(amount);
@@ -45,9 +52,11 @@ function Dashboard() {
     console.log("previous amount current year", previousAmountCurrentYear)
     
   };
+
   useEffect(() => {
       retreiveAmountCurrentYear().then(() => setPreviousAmountCurrentYear(amountCurrentYear));
       retreiveTotalAmount();
+      retrieveAmountCurrentDay();
   }, []);
 
   useEffect(() => {
@@ -55,6 +64,7 @@ function Dashboard() {
       setPreviousAmountCurrentYear(amountCurrentYear)
       retreiveAmountCurrentYear();
       retreiveTotalAmount();
+      retrieveAmountCurrentDay();
       triggerAnimationIfReady();
     }, 60000);
     return () => clearInterval(refreshTimeOut);
@@ -69,14 +79,25 @@ function Dashboard() {
   return (
     <>
       <section className='invest-page'>
-        <div className='totalInvest'>
-          <p>Total amount raised : <b><SlotCounter value={totalAmount} /></b></p>
+
+        <div className='secondaryAmountInfo'>
+          <div className='totalInvest'>
+            <p>Total raised :</p>
+            <p style={{fontWeight: "bold"}}><SlotCounter value={totalAmount} /></p>
+          </div>
+
+          <div className='todayInvest'>
+              <p>Today :</p>
+              <p style={{fontWeight: "bold"}}><SlotCounter value={amountCurrentDay} /></p>
+          </div>
         </div>
 
+        
         <div className='currentInvest'>
+          <p className='currentYear'>Raised in {new Date().getFullYear()} :</p>
           <p className='currentAmount'><SlotCounter value={amountCurrentYear} /></p>
-          <p className='currentYear'>raised in {new Date().getFullYear()}</p>
         </div>
+       
 
         {showAnimation && (
           <>
